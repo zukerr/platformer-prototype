@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerJump : MonoBehaviour
 {
@@ -38,9 +39,36 @@ public class PlayerJump : MonoBehaviour
 
     public bool IsJumping => isJumping;
 
+    private PlatformerPrototype inputActions;
+
+    private void OnEnable()
+    {
+        inputActions = new PlatformerPrototype();
+        inputActions.Player.Jump.performed += ExecuteJump;
+        inputActions.Player.Jump.Enable();
+    }
+
+    private void OnDisable()
+    {
+        inputActions.Player.Jump.Disable();
+    }
+
     private void Update()
     {
         HandleJump();
+    }
+
+    private void ExecuteJump(InputAction.CallbackContext context)
+    {
+        if (isGrounded)
+        {
+            Debug.Log("jumping.");
+            isJumping = true;
+            animator.SetBool("is_jumping", true);
+            currentJumpTime = jumpTimer;
+            rigidBody.velocity = new Vector2(rigidBody.velocity.x, 0);
+            rigidBody.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+        }
     }
 
     public void HandleJump()
@@ -56,7 +84,7 @@ public class PlayerJump : MonoBehaviour
             }
         }
 
-
+        /*
         if (isGrounded && Input.GetKeyDown(jumpKeybind))
         {
             Debug.Log("jumping.");
@@ -66,6 +94,7 @@ public class PlayerJump : MonoBehaviour
             rigidBody.velocity = new Vector2(rigidBody.velocity.x, 0);
             rigidBody.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
         }
+        */
 
         if(currentJumpTime > 0)
         {

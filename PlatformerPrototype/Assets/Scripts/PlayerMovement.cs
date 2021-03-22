@@ -13,10 +13,25 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     private float maxSpeed = 10f;
 
-    private bool isWalking = false;
+    //private bool isWalking = false;
     private bool facingRight = true;
 
     public bool FacingRight => facingRight;
+
+    private PlatformerPrototype inputAction;
+    private Vector2 axisVector;
+
+    private void OnEnable()
+    {
+        inputAction = new PlatformerPrototype();
+        inputAction.Player.Move.performed += x => axisVector = x.ReadValue<Vector2>();
+        inputAction.Player.Move.Enable();
+    }
+
+    private void OnDisable()
+    {
+        inputAction.Player.Move.Disable();
+    }
 
     // Update is called once per frame
     private void Update()
@@ -26,7 +41,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void MovePlayer()
     {
-        Vector2 movementVector = new Vector2(Input.GetAxisRaw("Horizontal"), 0);
+        Vector2 movementVector = new Vector2(axisVector.x, 0);
         //Vector2 movementVector = GlobalVariables.GetPlayerToMouseVector();
 
         movementVector.Normalize();
@@ -38,12 +53,12 @@ public class PlayerMovement : MonoBehaviour
 
         if (movementVector != Vector2.zero)
         {
-            isWalking = true;
+            //isWalking = true;
             animator.SetBool("is_walking", true);
         }
         else
         {
-            isWalking = false;
+            //isWalking = false;
             animator.SetBool("is_walking", false);
         }
         rigidBody.AddForce(movementVector * speed);

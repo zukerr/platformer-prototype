@@ -11,4 +11,5 @@ public class GlobalVariables
     public static readonly int PLAYER_LAYER = 10;
     public static readonly int FALLING_LAYER = 11;
     public static readonly int ON_PLATFORM_LAYER = 12;
+    public static readonly int DESTRUCTIBLE_LAYER = 13;
 }

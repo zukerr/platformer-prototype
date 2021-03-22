@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerShoot : MonoBehaviour
 {
@@ -21,24 +22,41 @@ public class PlayerShoot : MonoBehaviour
     [SerializeField]
     private AudioSource gunAudioSource = null;
 
-    private void Update()
+    private PlatformerPrototype inputActions;
+
+    private void OnEnable()
     {
-        HandleShooting();
+        inputActions = new PlatformerPrototype();
+        inputActions.Player.Fire.performed += HandleShooting;
+        inputActions.Player.Fire.Enable();
     }
 
-    public void HandleShooting()
+    private void OnDisable()
     {
+        inputActions.Player.Fire.Disable();
+    }
+
+    private void Update()
+    {
+        //HandleShooting();
+    }
+
+    public void HandleShooting(InputAction.CallbackContext context)
+    {
+        /*
         if(Input.GetKeyDown(shootKeybind))
         {
-            GameObject createdBullet = Instantiate(bulletPrefab, barrelEnd.position, Quaternion.identity, null);
-            //createdBullet.transform.Translate(Vector3.right * bulletSpeed * Time.deltaTime);
-
-            Vector2 shootingVector = playerMovement.FacingRight ? Vector2.right : Vector2.left;
-
-            createdBullet.GetComponent<Rigidbody2D>().AddForce(shootingVector * bulletSpeed);
-            PlayGunshotSound();
-            animator.SetTrigger("shot_trigger");
+            
         }
+        */
+        GameObject createdBullet = Instantiate(bulletPrefab, barrelEnd.position, Quaternion.identity, null);
+        //createdBullet.transform.Translate(Vector3.right * bulletSpeed * Time.deltaTime);
+
+        Vector2 shootingVector = playerMovement.FacingRight ? Vector2.right : Vector2.left;
+
+        createdBullet.GetComponent<Rigidbody2D>().AddForce(shootingVector * bulletSpeed);
+        PlayGunshotSound();
+        animator.SetTrigger("shot_trigger");
     }
 
     private void PlayGunshotSound()
