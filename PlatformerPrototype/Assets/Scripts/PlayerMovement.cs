@@ -13,7 +13,6 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     private float maxSpeed = 10f;
 
-    //private bool isWalking = false;
     private bool facingRight = true;
 
     public bool FacingRight => facingRight;
@@ -42,7 +41,6 @@ public class PlayerMovement : MonoBehaviour
     public void MovePlayer()
     {
         Vector2 movementVector = new Vector2(axisVector.x, 0);
-        //Vector2 movementVector = GlobalVariables.GetPlayerToMouseVector();
 
         movementVector.Normalize();
 
@@ -53,17 +51,13 @@ public class PlayerMovement : MonoBehaviour
 
         if (movementVector != Vector2.zero)
         {
-            //isWalking = true;
             animator.SetBool("is_walking", true);
         }
         else
         {
-            //isWalking = false;
             animator.SetBool("is_walking", false);
         }
         rigidBody.AddForce(movementVector * speed);
-        //rigidBody.velocity = new Vector2(movementVector.x * speed, rigidBody.velocity.y);
-
 
         if (Mathf.Abs(rigidBody.velocity.x) > maxSpeed)
         {

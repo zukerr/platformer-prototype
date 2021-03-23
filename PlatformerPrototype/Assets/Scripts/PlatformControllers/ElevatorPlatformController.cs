@@ -16,8 +16,27 @@ public class ElevatorPlatformController : MonoBehaviour
     private float elevationSpeed = 1f;
     [SerializeField]
     private float minTargetDistance = 0.1f;
+    [SerializeField]
+    private bool vertical = true;
 
     private bool movingUp = true;
+    private Vector3 toVector;
+    private Vector3 fromVector;
+
+
+    private void Awake()
+    {
+        if(vertical)
+        {
+            toVector = Vector3.up;
+            fromVector = Vector3.down;
+        }
+        else
+        {
+            toVector = Vector3.right;
+            fromVector = Vector3.left;
+        }
+    }
 
     private void Update()
     {
@@ -28,7 +47,7 @@ public class ElevatorPlatformController : MonoBehaviour
     {
         if(movingUp)
         {
-            elevatorPlatform.transform.Translate(Vector3.up * elevationSpeed * Time.deltaTime);
+            elevatorPlatform.transform.Translate(toVector * elevationSpeed * Time.deltaTime);
             if(Vector3.Distance(elevatorPlatformSurface.position, elevatorTop.position) < minTargetDistance)
             {
                 movingUp = false;
@@ -36,7 +55,7 @@ public class ElevatorPlatformController : MonoBehaviour
         }
         else
         {
-            elevatorPlatform.transform.Translate(Vector3.down * elevationSpeed * Time.deltaTime);
+            elevatorPlatform.transform.Translate(fromVector * elevationSpeed * Time.deltaTime);
             if (Vector3.Distance(elevatorPlatformSurface.position, elevatorBottom.position) < minTargetDistance)
             {
                 movingUp = true;

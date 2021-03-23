@@ -23,8 +23,6 @@ public class PlayerJump : MonoBehaviour
     [SerializeField]
     private float groundDiagonalDetectionFactor = 0.2f;
     [SerializeField]
-    private KeyCode jumpKeybind = KeyCode.Space;
-    [SerializeField]
     private float fallMultiplier = 5f;
     [SerializeField]
     private float gravity = 1f;
@@ -84,18 +82,6 @@ public class PlayerJump : MonoBehaviour
             }
         }
 
-        /*
-        if (isGrounded && Input.GetKeyDown(jumpKeybind))
-        {
-            Debug.Log("jumping.");
-            isJumping = true;
-            animator.SetBool("is_jumping", true);
-            currentJumpTime = jumpTimer;
-            rigidBody.velocity = new Vector2(rigidBody.velocity.x, 0);
-            rigidBody.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
-        }
-        */
-
         if(currentJumpTime > 0)
         {
             currentJumpTime -= Time.deltaTime;
@@ -108,15 +94,6 @@ public class PlayerJump : MonoBehaviour
                 isJumping = false;
                 animator.SetBool("is_jumping", false);
                 IsFalling = false;
-                /*
-                if(rigidBody.gameObject.layer == GlobalVariables.FALLING_LAYER)
-                {
-                    if(rigidBody.gameObject.transform.parent == null)
-                    {
-                        rigidBody.gameObject.layer = GlobalVariables.PLAYER_LAYER;
-                    }
-                }
-                */
             }
             rigidBody.gravityScale = 1;
             rigidBody.drag = linearDrag;
@@ -129,14 +106,7 @@ public class PlayerJump : MonoBehaviour
             {
                 rigidBody.gravityScale = gravity * fallMultiplier;
                 IsFalling = true;
-                //rigidBody.gameObject.layer = GlobalVariables.FALLING_LAYER;
             }
-            /*
-            else if(rigidBody.velocity.y > 0 && !Input.GetKey(jumpKeybind))
-            {
-                rigidBody.gravityScale = gravity * (fallMultiplier / 2);
-            }
-            */
         }
     }
 

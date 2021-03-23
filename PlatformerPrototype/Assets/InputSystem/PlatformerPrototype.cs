@@ -1,4 +1,4 @@
-// GENERATED AUTOMATICALLY FROM 'Assets/PlatformerPrototype.inputactions'
+// GENERATED AUTOMATICALLY FROM 'Assets/InputSystem/PlatformerPrototype.inputactions'
 
 using System;
 using System.Collections;
@@ -46,6 +46,14 @@ public class @PlatformerPrototype : IInputActionCollection, IDisposable
                     ""name"": ""Jump"",
                     ""type"": ""Button"",
                     ""id"": ""9d79410b-3697-4887-8a6f-cf8fa6d20216"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""EscMenu"",
+                    ""type"": ""Button"",
+                    ""id"": ""2d449a40-98a5-41e9-bc63-11df7df79e29"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
@@ -280,6 +288,17 @@ public class @PlatformerPrototype : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d0f90c8a-a9d4-4359-bfcd-ef2c7fdccf96"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""EscMenu"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -861,6 +880,7 @@ public class @PlatformerPrototype : IInputActionCollection, IDisposable
         m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
         m_Player_Fire = m_Player.FindAction("Fire", throwIfNotFound: true);
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
+        m_Player_EscMenu = m_Player.FindAction("EscMenu", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -926,6 +946,7 @@ public class @PlatformerPrototype : IInputActionCollection, IDisposable
     private readonly InputAction m_Player_Look;
     private readonly InputAction m_Player_Fire;
     private readonly InputAction m_Player_Jump;
+    private readonly InputAction m_Player_EscMenu;
     public struct PlayerActions
     {
         private @PlatformerPrototype m_Wrapper;
@@ -934,6 +955,7 @@ public class @PlatformerPrototype : IInputActionCollection, IDisposable
         public InputAction @Look => m_Wrapper.m_Player_Look;
         public InputAction @Fire => m_Wrapper.m_Player_Fire;
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
+        public InputAction @EscMenu => m_Wrapper.m_Player_EscMenu;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -955,6 +977,9 @@ public class @PlatformerPrototype : IInputActionCollection, IDisposable
                 @Jump.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
                 @Jump.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
                 @Jump.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
+                @EscMenu.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEscMenu;
+                @EscMenu.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEscMenu;
+                @EscMenu.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEscMenu;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -971,6 +996,9 @@ public class @PlatformerPrototype : IInputActionCollection, IDisposable
                 @Jump.started += instance.OnJump;
                 @Jump.performed += instance.OnJump;
                 @Jump.canceled += instance.OnJump;
+                @EscMenu.started += instance.OnEscMenu;
+                @EscMenu.performed += instance.OnEscMenu;
+                @EscMenu.canceled += instance.OnEscMenu;
             }
         }
     }
@@ -1131,6 +1159,7 @@ public class @PlatformerPrototype : IInputActionCollection, IDisposable
         void OnLook(InputAction.CallbackContext context);
         void OnFire(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
+        void OnEscMenu(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

@@ -166,6 +166,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2713597572461073939}
   - component: {fileID: 3281451869674058346}
+  - component: {fileID: 7194584602143567895}
   m_Layer: 0
   m_Name: SFX
   m_TagString: Untagged
@@ -199,7 +200,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 0e3186877068a6243ac40b02494f1a32, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.222
+  m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -283,3 +284,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &7194584602143567895
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5310882494022547782}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc7cb8cde205dd645bc153aca6bf2ebd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  source: {fileID: 3281451869674058346}
+  soundType: 0
+  volumeMultiplier: 0.2

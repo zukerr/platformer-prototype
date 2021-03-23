@@ -12,8 +12,6 @@ public class PlayerShoot : MonoBehaviour
     [SerializeField]
     private Transform barrelEnd = null;
     [SerializeField]
-    private KeyCode shootKeybind = KeyCode.Mouse0;
-    [SerializeField]
     private PlayerMovement playerMovement = null;
     [SerializeField]
     private float bulletSpeed = 1f;
@@ -36,21 +34,9 @@ public class PlayerShoot : MonoBehaviour
         inputActions.Player.Fire.Disable();
     }
 
-    private void Update()
-    {
-        //HandleShooting();
-    }
-
     public void HandleShooting(InputAction.CallbackContext context)
     {
-        /*
-        if(Input.GetKeyDown(shootKeybind))
-        {
-            
-        }
-        */
         GameObject createdBullet = Instantiate(bulletPrefab, barrelEnd.position, Quaternion.identity, null);
-        //createdBullet.transform.Translate(Vector3.right * bulletSpeed * Time.deltaTime);
 
         Vector2 shootingVector = playerMovement.FacingRight ? Vector2.right : Vector2.left;
 

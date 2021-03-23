@@ -193,14 +193,12 @@ public class SoundSettings : MonoBehaviour
         OnAmbientVolumeSlider();
         OnMusicVolumeSlider();
 
-        rootGameObject.SetActive(false);
-        //PlayerControls.soundSettingsOn = false;
+        rootGameObject.transform.parent.parent.GetComponent<EscMenu>().Toggle();
     }
 
     public void ApplyAndClose()
     {
-        rootGameObject.SetActive(false);
-        //PlayerControls.soundSettingsOn = false;
+        rootGameObject.transform.parent.parent.GetComponent<EscMenu>().Toggle();
     }
 
     public void ToggleSound()

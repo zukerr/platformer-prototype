@@ -33,7 +33,10 @@ public class Door : MonoBehaviour
         if(collision.tag == "Player")
         {
             //end level
-            SceneManager.LoadScene(0);
+            Debug.Log("Active scene build index: " + SceneManager.GetActiveScene().buildIndex);
+            Debug.Log("Scene count: " + SceneManager.sceneCountInBuildSettings);
+            Debug.Log("Loading scene of index: " + (SceneManager.GetActiveScene().buildIndex + 1) % SceneManager.sceneCountInBuildSettings);
+            SceneManager.LoadScene((SceneManager.GetActiveScene().buildIndex + 1) % SceneManager.sceneCountInBuildSettings);
         }
     }
 }
