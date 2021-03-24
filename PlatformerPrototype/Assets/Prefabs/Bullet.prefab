@@ -9983,3 +9983,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6262a5c9a262dfb4582afa2c39501250, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  destructibleHitPs: {fileID: 851252612266594774, guid: 01cbb001f777ad6449009b55939c26e5,
+    type: 3}

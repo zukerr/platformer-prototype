@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class BasicBullet : MonoBehaviour
 {
+    [SerializeField]
+    private GameObject destructibleHitPs = null;
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Debug.Log("Bullet collided!");
@@ -11,6 +14,7 @@ public class BasicBullet : MonoBehaviour
         {
             if (collision.gameObject.layer == GlobalVariables.DESTRUCTIBLE_LAYER)
             {
+                Instantiate(destructibleHitPs, transform.position, destructibleHitPs.transform.rotation);
                 Destroy(collision.gameObject);
             }
             Destroy(gameObject);
